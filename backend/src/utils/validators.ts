@@ -20,3 +20,8 @@ export const signUpValidator = [
     body("email").notEmpty().trim().isEmail().withMessage("Enter a valid Email"),
     body("password").notEmpty().trim().isLength({ min: 8 }).withMessage("Password must be 8 characters long"),
 ];
+
+export const loginValidator = [
+    body("email").notEmpty().trim().isEmail().withMessage("Enter a valid Email"),
+    body("password").notEmpty().trim().isLength({ min: 8 }).withMessage("Password must be 8 characters long"),
+];
