@@ -19,7 +19,7 @@ export const signUpUser = async (req: Request, res: Response, next: NextFunction
         const hashedPassword = (await hash(password, 10)).toString();
         const user = new users({ name, email, password: hashedPassword });
         await user.save();
-        return res.status(200).json({ message: "User registered successfully", id: user._id.toString() });
+        return res.status(201).json({ message: "User registered successfully", id: user._id.toString() });
     } catch (error) {
         return res.json({ message: "ERROR", cause: error.message });
     }
