@@ -16,14 +16,10 @@ export const getAiResponse = async (req : Request, res : Response) => {
             return res.status(400).send({ error: "Question is required in the request body." });
         }
 
-        const chain = standaloneQuestionPrompt.pipe(llm).pipe(new StringOutputParser());
-        const response = await chain.stream({ question: userInput });
-        let questionSummary = '';
-
-        for await (const resPart of response) {
-            questionSummary += resPart;
-        }
-
+        const chain = standaloneQuestionPrompt.pipe(llm);
+        const response = await chain.invoke({ question: userInput });
+        const questionSummary = response.content.toString();
+        
         const retriever = vectorStore.asRetriever({k:1});
         const response2 = await retriever.invoke(questionSummary);
 
