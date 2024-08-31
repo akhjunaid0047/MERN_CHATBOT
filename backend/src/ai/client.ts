@@ -18,7 +18,7 @@ export const supabaseVectorClient = createClient(sbUrl, sbApiKey);
 export const llm = new ChatOpenAI({ openAIApiKey: openaiApiKey, model: "gpt-4o-mini" });
 export const vectorStore = new SupabaseVectorStore(embeddings, {
     client: supabaseVectorClient,
-    tableName: "documents",
-    queryName: "match_documents"
+    tableName: "documents2",
+    queryName: "match_documents2"
 });
 
