@@ -52,3 +52,27 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
         return res.json({ message: "ERROR", cause: error.message });
     }
 }
+
+export const verifyUser = async (req: Request, res: Response) => {
+    try {
+        const userExist = await users.findById(res.locals.jwtData.id);
+        if (!userExist)
+            return res.status(401).json("User not registered");
+        return res.status(200).json({ message: "OK", email: userExist.email, name: userExist.name });
+    } catch (error) {
+        console.error(error);
+        res.status(200).json({ message: "ERROR", error: error.message });
+    }
+}
+
+export const userLogout = async (req: Request, res: Response) => {
+    try {
+        const userExist = await users.findById(res.locals.jwtData.id);
+        if (!userExist)
+            return res.status(401).json("User not registered");
+        res.clearCookie("auth_token",{httpOnly:true,domain:"localhost",signed:true});
+    } catch (error) {
+        console.error(error);
+        res.status(200).json({ message: "ERROR", error: error.message });
+    }
+}
