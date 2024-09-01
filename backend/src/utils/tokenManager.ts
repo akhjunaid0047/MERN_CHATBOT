@@ -11,7 +11,7 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
     const token = req.signedCookies["auth_token"];
     if (!token)
         return res.status(401).json({ message: "Token Not Received" });
-    jwt.verify(token, process.env.JWT_SECRET, (err: JsonWebTokenError, decoded: JwtPayload) => {
+    jwt.verify(token, process.env.JWT_KEY, (err: JsonWebTokenError, decoded: JwtPayload) => {
         if (err)
             return res.status(401).json({ message: err.name });
         res.locals.jwtData = decoded;
