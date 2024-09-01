@@ -70,9 +70,10 @@ export const userLogout = async (req: Request, res: Response) => {
         const userExist = await users.findById(res.locals.jwtData.id);
         if (!userExist)
             return res.status(401).json("User not registered");
-        res.clearCookie("auth_token", { httpOnly: true, domain: "localhost", signed: true });
-    } catch (error) {
-        console.error(error);
-        res.status(200).json({ message: "ERROR", error: error.message });
+        res.clearCookie("auth_token", { httpOnly: true, domain: "localhost", signed: true, path: "/" });
+        return res.status(200).json({message:"OK"});
+    } catch (err) {
+        console.error(err);
+        return res.status(200).json({ message: "ERROR", error: err.message });
     }
 }
