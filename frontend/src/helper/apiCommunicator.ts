@@ -37,3 +37,12 @@ export const signupUser = async (
     const data = await res.data;
     return data;
   };
+
+  export const sendChatRequest = async (message:string) => {
+    const res = await axios.post("/ai/sendQuery", { message });
+    if (res.status !== 201) {
+      throw new Error("unable to chat");
+    }
+    const data = await res.data;
+    return data;
+  };
