@@ -1,6 +1,9 @@
 import React from 'react'
 import { Box, Avatar, Typography } from "@mui/material";
 import { useAuth } from '../../context/AuthContext';
+import {createRoot} from 'react-dom/client'
+import Markdown from 'react-markdown'
+
 
 const ChatItem = ({content,role,}:{content: string; role:"user"|"assistant"}) => {
     const auth = useAuth();
@@ -11,7 +14,7 @@ const ChatItem = ({content,role,}:{content: string; role:"user"|"assistant"}) =>
                 <img src="openai.png" alt="OpenAI" width={"30px"} />
             </Avatar>
             <Box>
-                <Typography fontSize={"20px"}>{content}</Typography>
+                <Typography fontSize={"20px"}><Markdown>{content}</Markdown></Typography>
             </Box>
          </Box>
   ):(
