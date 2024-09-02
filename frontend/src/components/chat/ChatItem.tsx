@@ -1,7 +1,5 @@
-import React from 'react'
 import { Box, Avatar, Typography } from "@mui/material";
 import { useAuth } from '../../context/AuthContext';
-import {createRoot} from 'react-dom/client'
 import Markdown from 'react-markdown'
 
 

@@ -54,8 +54,8 @@ export const getAiResponse = async (req: Request, res: Response) => {
         // res.end();
 
 
-        // user.chats.push({ role: "assistant", content: `${finalResponse}` });
-        // await user.save();
+        user.chats.push({ role: "assistant", content: finalResponse });
+        await user.save();
 
         res.send(finalResponse);
     } catch (error) {

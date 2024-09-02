@@ -1,5 +1,4 @@
 import axios from "axios";
-import { json } from "react-router-dom";
 
 export const loginUser = async (email: string, password: string) => {
   const response = await axios.post("/user/login", { email, password });
@@ -47,4 +46,11 @@ export const sendChatRequest = async (message: string) => {
   }  
   const data = await res.data;
   return data;
+};
+
+export const deleteChats = async () => {
+  const res = await axios.get("/chats/delete");
+  if (res.status !== 200) {
+    throw new Error("Unable to delete chats");
+  }
 };

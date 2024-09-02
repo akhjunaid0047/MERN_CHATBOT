@@ -1,21 +1,22 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Box, Avatar, Typography, Button, IconButton } from "@mui/material";
 import red from "@mui/material/colors/red";
 import { useAuth } from '../context/AuthContext';
 import ChatItem from '../components/chat/ChatItem';
 import { IoMdSend } from "react-icons/io";
-import { sendChatRequest } from '../helper/apiCommunicator';
+import { deleteChats, sendChatRequest } from '../helper/apiCommunicator';
+import toast from 'react-hot-toast';
 
-  // const chatMessages = [
-  //   { role: "user", content: "Hello, how can I help you today?" },
-  //   { role: "assistant", content: "Hi! I’m here to assist you with any questions or tasks you have." },
-  //   { role: "user", content: "Can you explain what a neural network is?" },
-  //   { role: "assistant", content: "Sure! A neural network is a computational model inspired by the way biological neural networks in the human brain work. It consists of layers of nodes, or 'neurons,' that process input data and learn patterns to make predictions or classifications." },
-  //   { role: "user", content: "That sounds interesting! How does it learn?" },
-  //   { role: "assistant", content: "Neural networks learn by adjusting the weights of connections between neurons based on the errors in their predictions. This process is typically done using an algorithm called backpropagation, which helps minimize the error over time through multiple iterations of training." },
-  //   { role: "user", content: "Thanks! That was helpful." },
-  //   { role: "assistant", content: "You’re welcome! If you have any more questions, feel free to ask." }
-  // ];
+// const chatMessages = [
+//   { role: "user", content: "Hello, how can I help you today?" },
+//   { role: "assistant", content: "Hi! I’m here to assist you with any questions or tasks you have." },
+//   { role: "user", content: "Can you explain what a neural network is?" },
+//   { role: "assistant", content: "Sure! A neural network is a computational model inspired by the way biological neural networks in the human brain work. It consists of layers of nodes, or 'neurons,' that process input data and learn patterns to make predictions or classifications." },
+//   { role: "user", content: "That sounds interesting! How does it learn?" },
+//   { role: "assistant", content: "Neural networks learn by adjusting the weights of connections between neurons based on the errors in their predictions. This process is typically done using an algorithm called backpropagation, which helps minimize the error over time through multiple iterations of training." },
+//   { role: "user", content: "Thanks! That was helpful." },
+//   { role: "assistant", content: "You’re welcome! If you have any more questions, feel free to ask." }
+// ];
 
 type Message = {
   role: string;
@@ -37,6 +38,19 @@ const Chat = () => {
     const newReceivedMessage: Message = { role: "assistant", content: chatData };
     setChatMessages((prev) => [...prev, newReceivedMessage]);
   }
+
+  const handleDeleteChats = async () => {
+    try {
+      toast.loading("Deleting Chats", { id: "deletechats" });
+      await deleteChats();
+      setChatMessages([]);
+      toast.success("Deleted Chats Successfully", { id: "deletechats" });
+    } catch (error) {
+      console.log(error);
+      toast.error("Deleting chats failed", { id: "deletechats" });
+    }
+  };
+
   return (
     <Box sx={{ display: "flex", flex: 1, width: "100%", height: "100%", mt: 3, gap: 3 }}>
       <Box sx={{ display: { md: "flex", xs: "none", sm: "none", flex: 0.2, flexDirection: "column" } }}>
@@ -50,7 +64,7 @@ const Chat = () => {
           <Typography sx={{ mx: "auto", fontFamily: "work sans", my: 4, p: 3 }}>
             You can ask any type of questions to me but Avoid sharing personal information.
           </Typography>
-          <Button sx={{ width: "200px", my: "auto", color: "white", fontWeight: 700, borderRadius: 3, mx: "auto", bgcolor: red[300], ":hover": { bgcolor: red.A400 } }} >
+          <Button onClick={handleDeleteChats} sx={{ width: "200px", my: "auto", color: "white", fontWeight: 700, borderRadius: 3, mx: "auto", bgcolor: red[300], ":hover": { bgcolor: red.A400 } }} >
             Clear Chat
           </Button>
         </Box>
