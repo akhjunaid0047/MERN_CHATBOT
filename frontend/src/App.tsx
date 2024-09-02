@@ -8,22 +8,25 @@ import Signup from "./pages/Signup";
 import { useAuth } from "./context/AuthContext";
 
 
+
 function App() {
-  console.log(useAuth()?.isLoggedIn);
+  const auth = useAuth();
 
 
   return (
-   <main>
-    <Header />
+    <main>
+      <Header />
 
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/chat" element={<Chat />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-   </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        {auth?.isLoggedIn && auth.user && (
+          <Route path="/chat" element={<Chat />} />
+        )}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </main>
   )
 }
 

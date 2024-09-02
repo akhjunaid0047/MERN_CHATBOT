@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
 import email_icon from '../Assest/email.png';
 import password_icon from '../Assest/password.png';
 import eye_open from '../Assest/watch.png';
 import eye_close from '../Assest/closed-eyes.png';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate()
   const [values, setValues] = useState({ email: '', password: '' });
   const [visible, setVisible] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -46,6 +48,11 @@ const Login = () => {
       toast.error("Failed to Sign In", { id: "login" });
     }
   };
+  useEffect(() => {
+    if (auth?.user) {
+      return navigate("/chat");
+    }
+  }, [auth]);
 
   const containerStyle: React.CSSProperties = {
     position: 'absolute',
