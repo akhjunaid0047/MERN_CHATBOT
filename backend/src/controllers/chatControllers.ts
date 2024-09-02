@@ -15,3 +15,16 @@ export const deleteChats = async (req: Request, res: Response, next: NextFunctio
         return res.status(200).json({ message: "ERROR", cause: error.message });
     }
 };
+
+export const getChat = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = await users.findById(res.locals.jwtData.id);
+        if (!user) {
+            return res.status(401).send("User not registered");
+        }
+        return res.status(200).json({ message: "CHATS RECEIVED", chats: user.chats });
+    } catch (error) {
+        console.log(error);
+        return res.status(200).json({ message: "ERROR", cause: error.message });
+    }
+};

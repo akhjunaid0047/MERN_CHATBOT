@@ -54,3 +54,12 @@ export const deleteChats = async () => {
     throw new Error("Unable to delete chats");
   }
 };
+
+export const getChats = async () => {
+  const res = await axios.get("/chats/get-chat");
+  if (res.status !== 200) {
+    throw new Error("Unable to send chat");
+  }
+  const data = await res.data;
+  return data;
+};
