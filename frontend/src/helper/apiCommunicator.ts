@@ -38,12 +38,12 @@ export const signupUser = async (
   return data;
 };
 
-export const sendChatRequest = async (message: string) => {
-  const req = { "question": message };
+export const sendChatRequest = async (message: string, language:string) => {
+  const req = { "question": message, "language": language };
   const res = await axios.post("/ai/sendQuery", req);
   if (res.status !== 200) {
     throw new Error("unable to chat");
-  }  
+  }
   const data = await res.data;
   return data;
 };

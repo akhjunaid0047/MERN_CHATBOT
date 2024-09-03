@@ -16,6 +16,7 @@ export const getAiResponse = async (req: Request, res: Response) => {
             return res.status(401).json({ message: "User not registered OR Token malfunctioned" });
 
         const userInput = req.body.question;
+        const language = req.body.language;
         if (!userInput) {
             return res.status(400).send({ error: "Question is required in the request body." });
         }
@@ -39,6 +40,8 @@ export const getAiResponse = async (req: Request, res: Response) => {
             
             Relavant Information: ${relavantInfo}
             
+            Response Language: ${language}
+
             Answer:
         `;
 

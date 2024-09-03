@@ -24,6 +24,12 @@ type Message = {
   content: string;
 }
 const Chat = () => {
+  const [language, setLanguage] = useState('ENGLISH');
+  const handleLanguageChange = (e: { target: { checked: any; }; }) => {
+    const newLanguage = e.target.checked ? 'ENGLISH' : 'HINDI';
+    setLanguage(newLanguage);
+    console.log('Current Language: ', newLanguage);
+  };
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const auth = useAuth();
@@ -35,7 +41,7 @@ const Chat = () => {
     }
     const newMessage: Message = { role: "user", content };
     setChatMessages((prev) => [...prev, newMessage]);
-    const chatData = await sendChatRequest(content);
+    const chatData = await sendChatRequest(content,language);
     console.log(chatData);
     const newReceivedMessage: Message = { role: "assistant", content: chatData };
     setChatMessages((prev) => [...prev, newReceivedMessage]);
@@ -82,6 +88,7 @@ const Chat = () => {
           <Typography sx={{ mx: "auto", fontFamily: "work sans", my: 4, p: 3 }}>
             You can ask any type of questions to me but Avoid sharing personal information.
           </Typography>
+           
           <Button onClick={handleDeleteChats} sx={{ width: "200px", my: "auto", color: "white", fontWeight: 700, borderRadius: 3, mx: "auto", bgcolor: red[300], ":hover": { bgcolor: red.A400 } }} >
             Clear Chat
           </Button>
@@ -91,6 +98,20 @@ const Chat = () => {
         <Typography sx={{ textAlign: "center", fontSize: "40px", color: "white", mb: 2, mx: "auto", fontWeight: 600 }}>
           AssemblyBot 4-o
         </Typography>
+        {/*Language Toggle Switch*/}
+        <div className="switch">
+        <input
+          id="language-toggle"
+          className="check-toggle check-toggle-round-flat"
+          type="checkbox"
+          checked={language === 'ENGLISH'}
+          onChange={handleLanguageChange}
+        />
+        <label htmlFor="language-toggle"></label>
+        <span className="off">EN</span>
+        <span className="on">HI</span>
+      </div>
+
         <Box sx={{ width: "100%", height: "60vh", borderRadius: 3, mx: "auto", display: "flex", flexDirection: "column", overflow: "scroll", overflowX: "hidden", overflowY: "auto", scrollBehavior: "smooth" }}>
 
           {chatMessages.map((chat, index) => (
