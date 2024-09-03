@@ -9,7 +9,7 @@ const ChatItem = ({content,role,}:{content: string; role:"user"|"assistant"}) =>
     role === "assistant" ?(
          <Box sx={{display:"flex", p:2, bgcolor:"#004d5612", my:2 , gap:2}}>
             <Avatar sx={{ml:0}}>
-                <img src="openai.png" alt="OpenAI" width={"30px"} />
+                <img src="openai.png" alt="OpenAI" width={"50px"} />
             </Avatar>
             <Box>
                 <Typography fontSize={"20px"}><Markdown>{content}</Markdown></Typography>
