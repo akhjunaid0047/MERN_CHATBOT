@@ -42,7 +42,7 @@ const Chat = () => {
     }
     const newMessage: Message = { role: "user", content };
     setChatMessages((prev) => [...prev, newMessage]);
-    const chatData = await sendChatRequest(content,language);
+    const chatData = await sendChatRequest(content, language);
     console.log(chatData);
     const newReceivedMessage: Message = { role: "assistant", content: chatData };
     setChatMessages((prev) => [...prev, newReceivedMessage]);
@@ -98,7 +98,7 @@ const Chat = () => {
           <Typography sx={{ mx: "auto", fontFamily: "work sans", my: 4, p: 3 }}>
             You can ask any type of questions to me but Avoid sharing personal information.
           </Typography>
-           
+
           <Button onClick={handleDeleteChats} sx={{ width: "200px", my: "auto", color: "white", fontWeight: 700, borderRadius: 3, mx: "auto", bgcolor: red[300], ":hover": { bgcolor: red.A400 } }} >
             Clear Chat
           </Button>
@@ -108,55 +108,59 @@ const Chat = () => {
         <Typography sx={{ textAlign: "center", fontSize: "40px", color: "white", mb: 2, mx: "auto", fontWeight: 600 }}>
           AssemblyBot 4-o
         </Typography>
-        <Box sx={{display:"flex", flexDirection:"column", gap:5, justifyContent:"center", alignItems:"center"}}>
-        {/*Language Toggle Switch*/}
-        <div className="switch" style={{gap:5}}>
-        <input
-          id="language-toggle"
-          className="check-toggle check-toggle-round-flat"
-          type="checkbox"
-          checked={language === 'HINDI'}
-          onChange={handleLanguageChange}
-        />
-        <label htmlFor="language-toggle"></label>
-        <span className="off">Chat in Hindi</span>
-        {/* <span className="on">HI</span> */}
-      </div>
-      </Box>
-      <Box
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 5, justifyContent: "center", alignItems: "center" }}>
+          {/*Language Toggle Switch*/}
+          <div className="switch" style={{ gap: 5 }}>
+            <input
+              id="language-toggle"
+              className="check-toggle check-toggle-round-flat"
+              type="checkbox"
+              checked={language === 'HINDI'}
+              onChange={handleLanguageChange}
+            />
+            <label htmlFor="language-toggle"></label>
+            <span className="off">Chat in Hindi</span>
+            {/* <span className="on">HI</span> */}
+          </div>
+        </Box>
+        <Box
 
-ref={chatContainerRef}
+          ref={chatContainerRef}
 
-sx={{
+          sx={{
 
-  width: "100%",
+            width: "100%",
 
-  height: "60vh",
+            height: "60vh",
 
-  borderRadius: 3,
+            borderRadius: 3,
 
-  mx: "auto",
+            mx: "auto",
 
-  display: "flex",
+            display: "flex",
 
-  flexDirection: "column",
+            flexDirection: "column",
 
-  overflowY: "auto",
+            overflowY: "auto",
 
-  overflowX: "hidden",
+            overflowX: "hidden",
 
-  scrollBehavior: "smooth"  // Optional: for smooth scrolling
+            scrollBehavior: "smooth"  // Optional: for smooth scrolling
 
-}}
+          }}
 
->
+        >
 
           {chatMessages.map((chat, index) => (
             //@ts-ignore  
             <ChatItem content={chat.content} role={chat.role} key={index} />))}
         </Box>
         <div style={{ width: "100%", padding: "20px", borderRadius: 8, backgroundColor: "rgb(17,27,39)", display: "flex", margin: "auto" }}>
-          <input ref={inputRef} type="text" style={{ width: "100%", backgroundColor: "transparent", padding: "10px", border: "none", outline: "none", color: "white", fontSize: "20px" }} />
+          <input ref={inputRef} type="text" style={{ width: "100%", backgroundColor: "transparent", padding: "10px", border: "none", outline: "none", color: "white", fontSize: "20px" }} onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSubmit();
+            }
+          }} />
           <IconButton onClick={handleSubmit} sx={{ ml: "auto", color: "white" }}><IoMdSend /></IconButton>
         </div>
       </Box>
