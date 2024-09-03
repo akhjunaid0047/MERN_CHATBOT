@@ -26,12 +26,13 @@ type Message = {
 const Chat = () => {
   const [language, setLanguage] = useState('ENGLISH');
   const handleLanguageChange = (e: { target: { checked: any; }; }) => {
-    const newLanguage = e.target.checked ? 'ENGLISH' : 'HINDI';
+    const newLanguage = e.target.checked ? 'HINDI' : 'ENGLISH';
     setLanguage(newLanguage);
     console.log('Current Language: ', newLanguage);
   };
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const chatContainerRef = useRef<HTMLDivElement | null>(null);
   const auth = useAuth();
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const handleSubmit = async () => {
@@ -75,6 +76,15 @@ const Chat = () => {
       return navigate("/login");
     }
   }, [auth]);
+  useEffect(() => {
+
+    if (chatContainerRef.current) {
+
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+
+    }
+
+  }, [chatMessages]);
   return (
     <Box sx={{ display: "flex", flex: 1, width: "100%", height: "100%", mt: 3, gap: 3 }}>
       <Box sx={{ display: { md: "flex", xs: "none", sm: "none", flex: 0.2, flexDirection: "column" } }}>
@@ -98,21 +108,48 @@ const Chat = () => {
         <Typography sx={{ textAlign: "center", fontSize: "40px", color: "white", mb: 2, mx: "auto", fontWeight: 600 }}>
           AssemblyBot 4-o
         </Typography>
+        <Box sx={{display:"flex", flexDirection:"column", gap:5, justifyContent:"center", alignItems:"center"}}>
         {/*Language Toggle Switch*/}
-        <div className="switch">
+        <div className="switch" style={{gap:5}}>
         <input
           id="language-toggle"
           className="check-toggle check-toggle-round-flat"
           type="checkbox"
-          checked={language === 'ENGLISH'}
+          checked={language === 'HINDI'}
           onChange={handleLanguageChange}
         />
         <label htmlFor="language-toggle"></label>
-        <span className="off">EN</span>
-        <span className="on">HI</span>
+        <span className="off">Chat in Hindi</span>
+        {/* <span className="on">HI</span> */}
       </div>
+      </Box>
+      <Box
 
-        <Box sx={{ width: "100%", height: "60vh", borderRadius: 3, mx: "auto", display: "flex", flexDirection: "column", overflow: "scroll", overflowX: "hidden", overflowY: "auto", scrollBehavior: "smooth" }}>
+ref={chatContainerRef}
+
+sx={{
+
+  width: "100%",
+
+  height: "60vh",
+
+  borderRadius: 3,
+
+  mx: "auto",
+
+  display: "flex",
+
+  flexDirection: "column",
+
+  overflowY: "auto",
+
+  overflowX: "hidden",
+
+  scrollBehavior: "smooth"  // Optional: for smooth scrolling
+
+}}
+
+>
 
           {chatMessages.map((chat, index) => (
             //@ts-ignore  
