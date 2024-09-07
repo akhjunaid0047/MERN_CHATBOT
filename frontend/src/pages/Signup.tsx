@@ -58,12 +58,12 @@ const Signup: React.FC = () => {
 
   const containerStyle: React.CSSProperties = {
     position: 'absolute',
-    right: '5%',
+    // right: '5%',
     top: '50%',
     transform: 'translateY(-50%)',
     background: '#000000',
     padding: '30px',
-    width: '400px',
+    width: '100%',
     borderRadius: '20px',
     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.9)',
   };
