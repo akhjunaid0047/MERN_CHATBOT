@@ -8,7 +8,7 @@ import eye_close from '../Assest/closed-eyes.png';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [values, setValues] = useState({ email: '', password: '' });
   const [visible, setVisible] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -56,14 +56,16 @@ const Login = () => {
 
   const containerStyle: React.CSSProperties = {
     position: 'absolute',
-    // right: '5%',
+    left: '50%',
     top: '50%',
-    transform: 'translateY(-50%)',
+    transform: 'translate(-50%, -50%)',
     background: '#000000',
-    padding: '30px',
+    padding: '40px',
     width: '100%',
+    maxWidth: '500px',
     borderRadius: '20px',
     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.9)',
+    transition: 'all 0.3s ease',
   };
 
   const headerStyle: React.CSSProperties = {
@@ -72,12 +74,12 @@ const Login = () => {
     alignItems: 'center',
     gap: '1px',
     width: '100%',
-    marginBottom: '0',
+    marginBottom: '20px',
   };
 
   const textStyle: React.CSSProperties = {
     color: '#FFFFFF',
-    fontSize: '32px',
+    fontSize: '2.5rem',
     fontWeight: '700',
     fontFamily: 'Roboto, sans-serif',
     margin: '0',
@@ -89,7 +91,7 @@ const Login = () => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '15px',
+    gap: '20px',
     width: '100%',
   };
 
@@ -104,13 +106,13 @@ const Login = () => {
   };
 
   const inputStyle: React.CSSProperties = {
-    height: '32px',
+    height: '2.8rem',
     width: '100%',
     background: 'transparent',
-    border: '1px solid #333333',
+    // border: '1px solid #333333',
     outline: 'none',
     color: '#E0E0E0',
-    fontSize: '16px',
+    fontSize: '1.1rem',
     borderRadius: '4px',
     padding: '0 10px',
     transition: 'border-color 0.3s ease',
@@ -133,9 +135,9 @@ const Login = () => {
     background: '#333333',
     color: '#FFFFFF',
     borderRadius: '50px',
-    fontSize: '18px', // Increased text size
+    fontSize: '1.2rem',
     textAlign: 'center',
-    width: '60%', // Narrower width
+    width: '60%',
     height: '50px',
     border: 'none',
     transition: 'background-color 0.3s ease, transform 0.2s ease',
@@ -224,5 +226,3 @@ const Login = () => {
 };
 
 export default Login;
-
-

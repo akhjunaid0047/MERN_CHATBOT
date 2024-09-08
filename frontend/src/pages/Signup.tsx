@@ -56,30 +56,33 @@ const Signup: React.FC = () => {
     }
   }, [auth, navigate]);
 
+  // Styles optimized for larger desktop screens
   const containerStyle: React.CSSProperties = {
     position: 'absolute',
-    // right: '5%',
+    left: '50%',
     top: '50%',
-    transform: 'translateY(-50%)',
+    transform: 'translate(-50%, -50%)',
     background: '#000000',
-    padding: '30px',
+    padding: '40px',
     width: '100%',
+    maxWidth: '500px',
     borderRadius: '20px',
     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.9)',
+    transition: 'all 0.3s ease',
   };
 
   const headerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '1px',
+    gap: '5px',
     width: '100%',
     marginBottom: '0',
   };
 
   const textStyle: React.CSSProperties = {
     color: '#FFFFFF',
-    fontSize: '32px',
+    fontSize: '2.5rem',  // Larger font size for desktop
     fontWeight: '700',
     fontFamily: 'Roboto, sans-serif',
     margin: '0',
@@ -87,11 +90,11 @@ const Signup: React.FC = () => {
   };
 
   const inputsStyle: React.CSSProperties = {
-    marginTop: '20px',
+    marginTop: '30px',  // Increased margin for more spacing
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '15px',
+    gap: '20px',  // Increased gap between input fields
     width: '100%',
   };
 
@@ -100,19 +103,19 @@ const Signup: React.FC = () => {
     alignItems: 'center',
     width: '100%',
     borderRadius: '6px',
-    padding: '8px',
+    padding: '12px',  // Larger padding for input container
     backgroundColor: '#1C1C1C',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
   };
 
   const inputStyle: React.CSSProperties = {
-    height: '32px',
+    height: '2.8rem',  // Slightly larger input fields
     width: '100%',
     background: 'transparent',
     border: '1px solid #333333',
     outline: 'none',
     color: '#E0E0E0',
-    fontSize: '16px',
+    fontSize: '1.1rem',  // Increased font size for better readability
     borderRadius: '4px',
     padding: '0 10px',
     transition: 'border-color 0.3s ease',
@@ -123,7 +126,7 @@ const Signup: React.FC = () => {
     gap: '20px',
     justifyContent: 'center',
     width: '100%',
-    margin: '40px auto',
+    margin: '50px auto',
   };
 
   const submitStyle: React.CSSProperties = {
@@ -131,21 +134,21 @@ const Signup: React.FC = () => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '12px 24px',
+    padding: '15px 30px',
     background: '#333333',
     color: '#FFFFFF',
     borderRadius: '50px',
-    fontSize: '18px', // Increased text size
+    fontSize: '1.5rem',  // Larger text on the button
     textAlign: 'center',
-    width: '60%', // Narrower width
-    height: '50px',
+    width: '70%',  // Slightly wider button
+    height: '55px',  // Adjusted height
     border: 'none',
     transition: 'background-color 0.3s ease, transform 0.2s ease',
   };
 
   const iconStyle: React.CSSProperties = {
-    width: '24px',
-    height: '24px',
+    width: '26px',
+    height: '26px',
     marginRight: '12px',
     filter: 'drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5))',
   };
@@ -157,6 +160,7 @@ const Signup: React.FC = () => {
     color: '#E0E0E0',
     textAlign: 'center',
   };
+
   return (
     <form onSubmit={handleSubmit} style={containerStyle} autoComplete="off">
       <div style={headerStyle}>
@@ -166,11 +170,7 @@ const Signup: React.FC = () => {
 
       <div style={inputsStyle}>
         <div style={inputContainerStyle}>
-          <img
-            src={email_icon}
-            alt="Name Icon"
-            style={iconStyle}
-          />
+          <img src={email_icon} alt="Name Icon" style={iconStyle} />
           <input
             type="text"
             name="name"
@@ -184,11 +184,7 @@ const Signup: React.FC = () => {
         </div>
 
         <div style={inputContainerStyle}>
-          <img
-            src={email_icon}
-            alt="Email Icon"
-            style={iconStyle}
-          />
+          <img src={email_icon} alt="Email Icon" style={iconStyle} />
           <input
             type="email"
             name="email"
@@ -202,11 +198,7 @@ const Signup: React.FC = () => {
         </div>
 
         <div style={inputContainerStyle}>
-          <img
-            src={password_icon}
-            alt="Password Icon"
-            style={iconStyle}
-          />
+          <img src={password_icon} alt="Password Icon" style={iconStyle} />
           <input
             type={visible ? "text" : "password"}
             name="password"
@@ -226,11 +218,7 @@ const Signup: React.FC = () => {
         </div>
 
         <div style={inputContainerStyle}>
-          <img
-            src={password_icon}
-            alt="Confirm Password Icon"
-            style={iconStyle}
-          />
+          <img src={password_icon} alt="Confirm Password Icon" style={iconStyle} />
           <input
             type={visible ? "text" : "password"}
             name="confirmPassword"
